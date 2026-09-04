@@ -71,14 +71,33 @@ privileged backend, a GTK4 desktop app, and a GNOME Shell extension.
 
 ## Quick install
 
+> [!NOTE]
+> **Two builds exist.** This repository is a fork of
+> [Batuhan4/victus-control](https://github.com/Batuhan4/victus-control) by
+> [@Batuhan4](https://github.com/Batuhan4), who wrote the original project.
+> The additions here — animated lighting, the single-page dashboard, and the
+> fan-control escape hatch — are open upstream as
+> [#23](https://github.com/Batuhan4/victus-control/pull/23),
+> [#24](https://github.com/Batuhan4/victus-control/pull/24) and
+> [#25](https://github.com/Batuhan4/victus-control/pull/25). Once they are
+> merged, install upstream and ignore this fork.
+
+**This fork** — upstream plus the features above:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hemangjoshi37a/victus-control/main/bootstrap.sh | bash
+```
+
+**Upstream** — the original project, without the additions:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Batuhan4/victus-control/main/bootstrap.sh | bash
 ```
 
-The bootstrap script downloads the current `main` branch into a temporary directory and runs `install.sh`.
+Either script downloads that repository's current `main` into a temporary directory and runs `install.sh`. Each defaults to the repository it was fetched from, so the command you run is the build you get.
 
 > [!CAUTION]
-> Do **not** pipe this into `sudo`. `install.sh` elevates itself and needs to know the original desktop user to set up the GNOME extension.
+> Do **not** pipe either into `sudo`. `install.sh` elevates itself and needs to know the original desktop user to set up the GNOME extension.
 
 ---
 
@@ -119,13 +138,40 @@ It is a self-contained **userspace** controller that drives the **stock** in-tre
 
 ### Bootstrap one-liner
 
+This fork:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hemangjoshi37a/victus-control/main/bootstrap.sh | bash
+```
+
+Upstream:
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Batuhan4/victus-control/main/bootstrap.sh | bash
 ```
 
-Use this if you want a temporary checkout and the shortest install path.
+Use either if you want a temporary checkout and the shortest install path.
+
+`bootstrap.sh` installs from whichever repository you fetched it from. To point one at the other explicitly, set `VICTUS_CONTROL_REPO_URL`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hemangjoshi37a/victus-control/main/bootstrap.sh | \
+  VICTUS_CONTROL_REPO_URL=https://github.com/Batuhan4/victus-control bash
+```
+
+`VICTUS_CONTROL_REF` selects a branch or tag if you want something other than `main`.
 
 ### Git clone installer
+
+This fork:
+
+```bash
+git clone https://github.com/hemangjoshi37a/victus-control.git
+cd victus-control
+sudo ./install.sh
+```
+
+Upstream:
 
 ```bash
 git clone https://github.com/Batuhan4/victus-control.git
@@ -347,6 +393,14 @@ Substitute the version shown by `dkms status` if the command above does not reso
 ## Contributing
 
 See `AGENTS.md` for coding style, testing, and PR expectations. Hardware validation notes are very welcome in PR descriptions — this project lives on contributors reporting what does and does not work on their board.
+
+## Credits
+
+`victus-control` was created by [@Batuhan4](https://github.com/Batuhan4) with
+[@betelqeyza](https://github.com/betelqeyza) and the project's contributors.
+This fork adds the animated lighting, dashboard UI and fan-control escape
+hatch, and exists so people can run those while the changes are in review
+upstream.
 
 ## License
 

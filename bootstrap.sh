@@ -2,7 +2,11 @@
 
 set -euo pipefail
 
-repo_url="${VICTUS_CONTROL_REPO_URL:-https://github.com/Batuhan4/victus-control}"
+# This is the hemangjoshi37a fork, so the default points here; otherwise
+# curling this script from the fork would download and install upstream's tree
+# instead of the one it came from. Override with VICTUS_CONTROL_REPO_URL to
+# install the upstream build: see the README's install section.
+repo_url="${VICTUS_CONTROL_REPO_URL:-https://github.com/hemangjoshi37a/victus-control}"
 repo_ref="${VICTUS_CONTROL_REF:-main}"
 archive_url="${VICTUS_CONTROL_ARCHIVE_URL:-${repo_url}/archive/refs/heads/${repo_ref}.tar.gz}"
 tmpdir=""
